@@ -1,0 +1,11 @@
+debug: true
+spring:
+  data:
+    mongodb:
+      auto-index-creation: true
+
+client:
+  nbp:
+    url: https://api.nbp.pl
+    responseTimeout: PT1S
+    connectionTimeout: PT1S
