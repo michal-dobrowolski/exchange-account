@@ -12,9 +12,7 @@ import java.util.Currency;
 @JsonDeserialize(as = USDSubAccount.class)
 public class USDSubAccount extends SubAccount {
 
-    private static final String CURRENCY_CODE = "USD";
-
-    protected Currency currency = Currency.getInstance(CURRENCY_CODE);
+    protected Currency currency = Currency.getInstance(com.example.task.Currency.USD.getCode());
 
     public USDSubAccount(BigDecimal balance) {
         this.balance = balance;

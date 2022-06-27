@@ -1,5 +1,6 @@
 package com.example.task.api;
 
+import com.example.task.Currency;
 import com.example.task.domain.Account;
 import com.example.task.domain.PLNSubAccount;
 import com.example.task.domain.USDSubAccount;
@@ -34,8 +35,8 @@ public class AccountRequest {
                 .lastName(this.getLastName())
                 .subAccounts(
                         Map.of(
-                                "PLN", new PLNSubAccount(this.getPlnBalance()),
-                                "USD", new USDSubAccount(BigDecimal.valueOf(0L))
+                                Currency.PLN.getCode(), new PLNSubAccount(this.getPlnBalance()),
+                                Currency.USD.getCode(), new USDSubAccount(BigDecimal.valueOf(0L))
                         )
                 ).build();
     }

@@ -12,9 +12,7 @@ import java.util.Currency;
 @JsonDeserialize(as = PLNSubAccount.class)
 public class PLNSubAccount extends SubAccount {
 
-    private static final String CURRENCY_CODE = "PLN";
-
-    private Currency currency = Currency.getInstance(CURRENCY_CODE);
+    private Currency currency = Currency.getInstance(com.example.task.Currency.PLN.getCode());
 
     public PLNSubAccount(BigDecimal balance) {
         this.balance = balance;

@@ -1,5 +1,6 @@
 package com.example.task.domain;
 
+import com.example.task.Currency;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -12,7 +13,7 @@ class ExchangeService {
         SubAccount fromSubAccount = account.getSubAccount(from);
         SubAccount toSubAccount = account.getSubAccount(to);
         fromSubAccount.subtractFromBalance(amount);
-        if (fromSubAccount.getCurrencyCode().equals("PLN")) {
+        if (fromSubAccount.getCurrencyCode().equals(Currency.PLN.getCode())) {
             toSubAccount.addToBalance(amount.divide(currencyRate, 2, RoundingMode.HALF_UP));
         } else {
             toSubAccount.addToBalance(amount.multiply(currencyRate));
