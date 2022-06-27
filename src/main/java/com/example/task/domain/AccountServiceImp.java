@@ -1,6 +1,5 @@
 package com.example.task.domain;
 
-import com.example.task.ApplicationException;
 import com.example.task.infrastructure.database.mongo.AccountDocument;
 import com.example.task.infrastructure.database.mongo.AccountRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,15 +12,18 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 class AccountServiceImp implements AccountService {
 
-    private final CurrencyRateProvider currencyRateProvider;
-
     private final ExchangeService exchangeService;
 
     private final AccountRepository accountRepository;
 
+    private final CurrencyRateProvider currencyRateProvider;
+
+    private final BalanceHistoryService balanceHistoryService;
+
     @Override
-    public Mono<String> create(Account account) throws ApplicationException {
+    public Mono<String> create(Account account) {
         return accountRepository.save(AccountDocument.from(account))
+                .flatMap(balanceHistoryService::create)
                 .map(AccountDocument::getId);
     }
 
@@ -36,6 +38,7 @@ class AccountServiceImp implements AccountService {
                         currencyRateProvider.retrieveCurrencyRate("USD"),
                         (account, currencyRate) -> exchangeService.exchange(account, from, to, amount, currencyRate)
                 ).flatMap(account -> accountRepository.save(AccountDocument.from(account)))
+                .flatMap(balanceHistoryService::create)
                 .map(AccountDocument::toDomain);
     }
 
