@@ -52,7 +52,7 @@ public class PeselUtil {
     private static int getMonth(String[] date, String centuryKey) {
         return Integer.parseInt(centuryKey) % 2 == 0 ?
                 Integer.parseInt(date[1].substring(1, 2)) :
-                Integer.parseInt(date[1].substring(1, 2)) * 10;
+                Integer.parseInt(date[1].substring(1, 2)) + 10;
     }
 
     private static String getCenturyKey(String[] date) {
