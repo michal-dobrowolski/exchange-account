@@ -1,10 +1,7 @@
 package com.example.task.domain;
 
 import com.example.task.ApplicationException;
-import com.example.task.domain.Account;
-import com.example.task.domain.ExchangeService;
-import com.example.task.domain.PLNSubAccount;
-import com.example.task.domain.USDSubAccount;
+import com.example.task.Currency;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -57,13 +54,13 @@ class ExchangeServiceTest {
 
     private Account prepareAccount(BigDecimal usd) {
         return new Account.AccountBuilder()
-                .pesel("72010133333")
+                .pesel("92010133333")
                 .firstName("Robert")
                 .lastName("Makłowicz")
                 .subAccounts(
                         Map.of(
-                                "PLN", new PLNSubAccount(BigDecimal.valueOf(200L)),
-                                "USD", new USDSubAccount(usd)
+                                Currency.PLN.getCode(), new PLNSubAccount(BigDecimal.valueOf(200L)),
+                                Currency.USD.getCode(), new USDSubAccount(usd)
                         )
                 )
                 .build();
