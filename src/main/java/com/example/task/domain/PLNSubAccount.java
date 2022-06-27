@@ -18,9 +18,6 @@ public class PLNSubAccount extends SubAccount {
         this.balance = balance;
     }
 
-    PLNSubAccount() {
-    }
-
     @Override
     String getCurrencyCode() {
         return currency.getCurrencyCode();

@@ -18,9 +18,6 @@ public class USDSubAccount extends SubAccount {
         this.balance = balance;
     }
 
-    public USDSubAccount() {
-    }
-
     @Override
     String getCurrencyCode() {
         return currency.getCurrencyCode();
