@@ -1,10 +1,6 @@
 package com.example.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalAccessor;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,24 +25,23 @@ public class PeselUtil {
         String splitByPairsRegex = "(?<=\\G.{2})";
         String[] date = getDateFromPesel(pesel).split(splitByPairsRegex);
         String centuryKey = getCenturyKey(date);
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .optionalStart()
-                .appendPattern("uuuu")
-                .optionalEnd()
-                .optionalStart()
-                .appendValueReduced(ChronoField.YEAR, 2, 2, centuries.get(centuryKey))
-                .optionalEnd()
-                .toFormatter();
-        TemporalAccessor parsedYear = formatter.parse(date[0]);
         return LocalDate.of(
-                parsedYear.get(ChronoField.YEAR),
+                centuries.get(centuryKey) + getYear(date),
                 getMonth(date, centuryKey),
                 getDayOfMonth(date)
         );
     }
 
-    private static int getDayOfMonth(String[] date) {
-        return Integer.parseInt(date[2]);
+    private static String getDateFromPesel(String pesel) {
+        return pesel.substring(0, 6);
+    }
+
+    private static String getCenturyKey(String[] date) {
+        return date[1].substring(0, 1);
+    }
+
+    private static int getYear(String[] date) {
+        return Integer.parseInt(date[0]);
     }
 
     private static int getMonth(String[] date, String centuryKey) {
@@ -55,12 +50,8 @@ public class PeselUtil {
                 Integer.parseInt(date[1].substring(1, 2)) + 10;
     }
 
-    private static String getCenturyKey(String[] date) {
-        return date[1].substring(0, 1);
-    }
-
-    private static String getDateFromPesel(String pesel) {
-        return pesel.substring(0, 6);
+    private static int getDayOfMonth(String[] date) {
+        return Integer.parseInt(date[2]);
     }
 
 }
