@@ -17,6 +17,7 @@ public class AccountResource {
     public Mono<String> create(@Valid @RequestBody AccountRequest request) {
         return accountService.create(request.toDomain());
     }
+//featA
 //featB
 //featB - poprawione
     @GetMapping("/accounts/{pesel}")
