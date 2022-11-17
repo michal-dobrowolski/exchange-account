@@ -10,6 +10,7 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor
 public class AccountResource {
+//nowy commit
     private final AccountService accountService;
     //featF
     @PostMapping("/accounts")
