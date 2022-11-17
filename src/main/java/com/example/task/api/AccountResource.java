@@ -10,9 +10,7 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor
 public class AccountResource {
-//I tworza się konfilkty 
     private final AccountService accountService;
-//tutaj ktos cos domergowal
     @PostMapping("/accounts")
     public Mono<String> create(@Valid @RequestBody AccountRequest request) {
         return accountService.create(request.toDomain());
