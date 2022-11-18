@@ -19,7 +19,7 @@ public class AccountResource {
     }
 //featA
 //featB
-//featB - poprawione
+//featB - poprawione - poprawka
     @GetMapping("/accounts/{pesel}")
     public Mono<AccountResponse> getAccountByPesel(@PathVariable("pesel") String pesel) {
         return accountService.getAccountByPesel(pesel).map(AccountResponse::map);
