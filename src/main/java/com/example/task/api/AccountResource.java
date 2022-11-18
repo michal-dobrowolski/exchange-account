@@ -18,8 +18,6 @@ public class AccountResource {
         return accountService.create(request.toDomain());
     }
     //featX
-//featA
-//featB
 //featB - poprawione - poprawka
     @GetMapping("/accounts/{pesel}")
     public Mono<AccountResponse> getAccountByPesel(@PathVariable("pesel") String pesel) {
